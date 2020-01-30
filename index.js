@@ -15,6 +15,7 @@ export default class OTPInputView extends Component {
         code: PropTypes.string,
         secureTextEntry: PropTypes.bool,
         keyboardType: PropTypes.string,
+        returnKeyType:PropTypes.string,
         clearInputs: PropTypes.bool
     }
 
@@ -26,6 +27,7 @@ export default class OTPInputView extends Component {
         autoFocusOnLoad: true,
         secureTextEntry: false,
         keyboardType: "number-pad",
+        returnKeyType: "done",
         clearInputs: false
     }
 
@@ -185,7 +187,7 @@ export default class OTPInputView extends Component {
     }
 
     renderOneInputField = (_, index) => {
-        const { codeInputFieldStyle, codeInputHighlightStyle, secureTextEntry, keyboardType } = this.props
+        const { codeInputFieldStyle, codeInputHighlightStyle, secureTextEntry, keyboardType, returnKeyType } = this.props
         const { defaultTextFieldStyle } = styles
         const { selectedIndex, digits } = this.state
         const { clearInputs } = this.props
@@ -201,6 +203,7 @@ export default class OTPInputView extends Component {
                     onKeyPress={({ nativeEvent: { key } }) => { this.handleKeyPressTextInput(index, key) }}
                     value={ !clearInputs ? digits[index]: "" }
                     keyboardType={keyboardType}
+                    returnKeyType={returnKeyType}
                     textContentType={isAutoFillSupported ? "oneTimeCode" : "none"}
                     key={index}
                     selectionColor="#00000000"
